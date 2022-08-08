@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "anvil"
+version = "0.1.0"
+description = "Smashing a bunch of stuff together until things work"
+authors = ["hacksparr0w <hacksparr0w@protonmail.com>"]
+license = "MIT"
+include = ["anvil_blueprints/*.py"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+click = "^8.1.3"
+
+[tool.poetry.scripts]
+anvil = "anvil.__main__:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
