@@ -52,7 +52,7 @@ def clone_git_repository(
         command.extend(["-b", branch])
 
     if depth:
-        command.extend(["--depth", depth])
+        command.extend(["--depth", str(depth)])
 
     command.extend([url, str(path)])
 
