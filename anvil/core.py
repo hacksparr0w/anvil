@@ -39,10 +39,10 @@ class Paths:
         return self.current_package_directory / "downloads"
 
     def of(self, name: str) -> "Paths":
-        return type(self).of(self.package_directory, name)
+        return type(self).build(self.package_directory, name)
 
     @classmethod
-    def of(cls, package_directory: Path, name: str) -> "Paths":
+    def build(cls, package_directory: Path, name: str) -> "Paths":
         current_package_directory = package_directory / name
 
         return cls(package_directory, current_package_directory)
@@ -177,7 +177,7 @@ def install(
         raise FileNotFoundError(f"No blueprint found for {name}")
 
     blueprint = load_blueprint(blueprint_file)
-    paths = Paths.of(package_directory, name)
+    paths = Paths.build(package_directory, name)
     instance = blueprint(paths)
 
     if instance.is_built():
