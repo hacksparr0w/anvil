@@ -89,20 +89,23 @@ class GitSource(Source):
         self,
         url: str,
         branch: Optional[str] = None,
-        depth: Optional[int] = None
+        depth: Optional[int] = None,
+        recursive: bool = False
     ) -> None:
         super().__init__()
 
         self.url = url
         self.branch = branch
         self.depth = depth
+        self.recursive = recursive
 
     def fetch(self, blueprint: "Blueprint") -> None:
         clone_git_repository(
             self.url,
             blueprint.paths.current_package_directory,
             branch=self.branch,
-            depth=self.depth
+            depth=self.depth,
+            recursive=self.recursive
         )
 
     def is_fetched(self, blueprint: "Blueprint") -> None:

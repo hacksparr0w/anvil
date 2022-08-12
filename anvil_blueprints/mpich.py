@@ -41,7 +41,7 @@ class Mpich(Blueprint):
         )
 
         run(
-            ["./configure", f"--prefix={build_directory}"],
+            ["./configure", "--enable-shared", f"--prefix={build_directory}"],
             environment={
                 **environment,
                 "FFLAGS": "-fallow-argument-mismatch",

@@ -44,7 +44,8 @@ def clone_git_repository(
     url: str,
     path: Path,
     branch: Optional[str] = None,
-    depth: Optional[int] = None
+    depth: Optional[int] = None,
+    recursive: bool = False
 ):
     command = ["git", "clone"]
 
@@ -53,6 +54,9 @@ def clone_git_repository(
 
     if depth:
         command.extend(["--depth", str(depth)])
+
+    if recursive:
+        command.append("--recursive")
 
     command.extend([url, str(path)])
 

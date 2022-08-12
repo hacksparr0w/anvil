@@ -27,7 +27,7 @@ class Lammps(Blueprint):
         make_file = (
             working_directory
             / "MAKE"
-            /  "OPTIONS"
+            / "OPTIONS"
             / f"Makefile.g++_mpich"
         )
 
@@ -40,11 +40,35 @@ class Lammps(Blueprint):
         )
 
         run(
+            ["make", "yes-plugin"],
+            environment=environment,
+            working_directory=working_directory
+        )
+
+        run(
+            ["make", "yes-kspace"],
+            environment=environment,
+            working_directory=working_directory
+        )
+
+        run(
             [
                 "sed",
                 "-i",
                 "-E",
                 r"s/(CCFLAGS|LINKFLAGS) =(.+?)$/\1 =\2 -fopenmp/",
+                str(make_file)
+            ],
+            environment=environment,
+            working_directory=working_directory
+        )
+
+        run(
+            [
+                "sed",
+                "-i",
+                "-E",
+                r"s/(mode) =(.+?)$/\1 = shared/",
                 str(make_file)
             ],
             environment=environment,
