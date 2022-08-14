@@ -2,7 +2,7 @@ import os
 
 from typing import List
 
-from anvil import Blueprint, Source, GitSource, run
+from anvil import Blueprint, GitSource, run
 
 
 class DeepMdKit(Blueprint):
@@ -11,7 +11,7 @@ class DeepMdKit(Blueprint):
         return "deepmd-kit"
 
     @classmethod
-    def source(cls) -> Source:
+    def source(cls) -> GitSource:
         return GitSource(
             "https://github.com/deepmodeling/deepmd-kit.git",
             recursive=True

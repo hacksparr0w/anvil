@@ -3,7 +3,7 @@ from posix import environ
 
 from typing import List
 
-from anvil import Blueprint, GitSource, Source, run
+from anvil import Blueprint, GitSource, run
 
 
 class Lammps(Blueprint):
@@ -12,7 +12,7 @@ class Lammps(Blueprint):
         return "lammps"
 
     @classmethod
-    def source(cls) -> Source:
+    def source(cls) -> GitSource:
         return GitSource(
             "https://github.com/lammps/lammps.git",
             branch="stable"

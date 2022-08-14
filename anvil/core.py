@@ -59,10 +59,11 @@ class Source(metaclass=ABCMeta):
 
 
 class HttpSource(Source):
-    def __init__(self, url: str) -> None:
+    def __init__(self, url: str, file_name: Optional[str] = None) -> None:
         super().__init__()
 
         self.url = url
+        self.file_name = file_name
 
     def fetch(self, blueprint: "Blueprint") -> None:
         url = self.url
@@ -72,16 +73,23 @@ class HttpSource(Source):
 
         download_directory.mkdir(parents=True, exist_ok=True)
 
-        file_name = Path(urlparse(url).path).name
-        path = download_directory / file_name
+        path = download_directory / self.file_name
 
         download_file(url, path)
 
     def is_fetched(self, blueprint: "Blueprint") -> None:
-        file_name = Path(urlparse(self.url).path).name
-        path = blueprint.paths.current_package_download_directory / file_name
+        path = (
+            blueprint.paths.current_package_download_directory
+            / self.file_name
+        )
 
         return path.is_file()
+
+    @classmethod
+    def from_url(cls, url):
+        file_name = Path(urlparse(url).path).name
+
+        return cls(url, file_name)
 
 
 class GitSource(Source):

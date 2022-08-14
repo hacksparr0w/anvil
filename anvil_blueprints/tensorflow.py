@@ -1,9 +1,8 @@
 import os
-import itertools
 
 from typing import List
 
-from anvil import Blueprint, GitSource, Source, run
+from anvil import Blueprint, GitSource, run
 
 
 class Tensorflow(Blueprint):
@@ -12,7 +11,7 @@ class Tensorflow(Blueprint):
         return "tensorflow"
 
     @classmethod
-    def source(cls) -> Source:
+    def source(cls) -> GitSource:
         return GitSource(
             "https://github.com/tensorflow/tensorflow",
             branch="v2.8.0",

@@ -2,7 +2,7 @@ import os
 
 from typing import List
 
-from anvil import Blueprint, GitSource, Source, run
+from anvil import Blueprint, GitSource, run
 
 
 class Mlip(Blueprint):
@@ -11,7 +11,7 @@ class Mlip(Blueprint):
         return "mlip"
 
     @classmethod
-    def source(cls) -> Source:
+    def source(cls) -> GitSource:
         return GitSource(
             "git@gitlab.com:ashapeev/mlip-2.git"
         )

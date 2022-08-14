@@ -2,7 +2,7 @@ import os
 
 from typing import List
 
-from anvil import Blueprint, GitSource, Source, run
+from anvil import Blueprint, GitSource, run
 
 
 class LammpsMlipInterface(Blueprint):
@@ -11,7 +11,7 @@ class LammpsMlipInterface(Blueprint):
         return "lammps-mlip-interface"
 
     @classmethod
-    def source(cls) -> Source:
+    def source(cls) -> GitSource:
         return GitSource(
             "https://gitlab.com/ashapeev/interface-lammps-mlip-2.git"
         )

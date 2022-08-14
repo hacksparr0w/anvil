@@ -1,8 +1,6 @@
-from pathlib import Path
 from typing import List
-from urllib.parse import urlparse
 
-from anvil import Blueprint, Source, HttpSource, run
+from anvil import Blueprint, HttpSource, run
 
 
 class Bazelisk(Blueprint):
@@ -11,8 +9,8 @@ class Bazelisk(Blueprint):
         return "bazelisk"
 
     @classmethod
-    def source(cls) -> Source:
-        return HttpSource(
+    def source(cls) -> HttpSource:
+        return HttpSource.from_url(
             "https://github.com/bazelbuild/bazelisk"
             "/releases/download/v1.12.0/bazelisk-linux-amd64"
         )
@@ -25,7 +23,7 @@ class Bazelisk(Blueprint):
         paths = self.paths
         bin_directory = paths.current_package_build_directory / "bin"
         working_directory = paths.current_package_directory
-        executable_file_name = Path(urlparse(self.source().url).path).name
+        executable_file_name = self.source().file_name
         executable_file = (
             paths.current_package_download_directory / executable_file_name
         )
