@@ -22,6 +22,7 @@ class Atomsk(Blueprint):
         paths = self.paths
         build_directory = paths.current_package_build_directory
         working_directory = paths.current_package_directory / "src"
+        bin_directory = build_directory / "bin"
 
         environment = {
             "PATH": os.environ["PATH"],
@@ -33,6 +34,8 @@ class Atomsk(Blueprint):
             environment=environment,
             working_directory=working_directory
         )
+
+        bin_directory.mkdir(parents=True)
 
         run(
             ["make", "install"],
