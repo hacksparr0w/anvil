@@ -52,6 +52,12 @@ class Lammps(Blueprint):
         )
 
         run(
+            ["make", "yes-molecule"],
+            environment=environment,
+            working_directory=working_directory
+        )
+
+        run(
             [
                 "sed",
                 "-i",
