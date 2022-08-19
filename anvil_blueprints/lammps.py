@@ -58,6 +58,12 @@ class Lammps(Blueprint):
         )
 
         run(
+            ["make", "yes-manybody"],
+            environment=environment,
+            working_directory=working_directory
+        )
+
+        run(
             [
                 "sed",
                 "-i",
