@@ -8,7 +8,7 @@ include = ["anvil_blueprints/*.py"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-click = "^8.1.3"
+click = "7.1.2"
 
 [tool.poetry.scripts]
 anvil = "anvil.__main__:main"
